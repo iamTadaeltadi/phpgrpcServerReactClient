@@ -1,24 +1,35 @@
-_Note: if you want to play around, don't forget to grab all dependencies._   
-```bash
-docker-compose run grpc_php_server composer install
-docker-compose run client_nodejs npm install
-```
-For trying it out:
-```bash
- docker-compose up
-```
-The output result:
-```bash
-grpc_php_server    | DEBU[0000] [rpc]: started                               
-grpc_php_server    | DEBU[0000] [grpc]: started                              
-client_nodejs      | Service response
-client_nodejs      |  { body: 'Hello' }
-```
-As you could see it's tremendous simple to start working with gRPC and start thinking of adapting that one to our workflow.
 
-What kind of benefits of adopting GRPC:
-1. Easy to understand.
-2. Web infrastructure already built on top of HTTP.
-3. Great tooling for testing, inspection, and modification.
-4. Loose coupling between clients/server makes changes easy.
-5. High-quality HTTP implementations in every language.
+Project Setup Instructions
+Build Docker Image :
+Navigate to the envoy directory:
+```bash
+cd envoy
+```
+Building the Docker Image
+```bash
+docker build -t my-envoy
+```
+Run the Docker image:
+```bash
+docker run --rm -v $(pwd)/envoy.yaml:/etc/envoy/envoy.yaml -p 9901:9901 -p 8000:8000 my-envoy
+```
+
+Running the Frontend
+Navigate to the src/frontend directory:
+```bash
+cd src/frontendd
+```
+Start the frontend server:
+```bash
+npm start
+```
+Navigate to the src/php directory:
+
+```bash
+cd src/php
+```
+Running the Backend
+```bash
+./rr-grpc serve -d -v
+```
+After setting up the frontend and backend, you can send messages to the gRPC server from the frontend. Enjoy coding! 😊
