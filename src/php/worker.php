@@ -1,13 +1,16 @@
 <?php
 declare(strict_types=1);
+require "vendor/autoload.php";
 /**
  * Sample GRPC PHP server.
  */
 use Spiral\Goridge;
 use Spiral\RoadRunner;
+use GRPC\Pinger\PingServiceInterface;
+use GRPC\Pinger\PingService;
+
 ini_set('display_errors', 'stderr');
-require "vendor/autoload.php";
 $server = new \Spiral\GRPC\Server();
-$server->registerService(\Service\ContrivedServiceInterface::class, new \Service\ContrivedService());
+$server->registerService(PingServiceInterface::class, new PingService());
 $w = new RoadRunner\Worker(new Goridge\StreamRelay(STDIN, STDOUT));
 $server->serve($w);

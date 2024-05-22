@@ -1,10 +1,12 @@
 {
     "require": {
-        "spiral/php-grpc": "^1.0"
+        "spiral/php-grpc": "^1.0",
+        "stanley-cheung/protobuf-php": "^0.6.0",
+        "grpc/grpc": "^1.57"
     },
     "autoload": {
         "psr-4": {
-            "": ""
+            "GRPC\\": "generated/GRPC"
         }
     }
 }
