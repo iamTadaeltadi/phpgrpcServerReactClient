@@ -1,5 +1,5 @@
-# version: "3.7"
-# services:
+version: "3.8"
+services:
 
 #   envoy:
 #     build:
@@ -8,3 +8,21 @@
 #     image: kostyay/grpc-web-example-envoy
 #     ports:
 #       - "8000:8000"
+  envoy:
+      image: envoyproxy/envoy-dev:b145180d17cac80aa5f9a7801429d52017fea6d1
+      volumes:
+        - ./envoy.yaml:/etc/envoy/envoy.yaml
+      ports:
+        - "8000:8000"
+        - "9901:9901"
+  backend:
+    build: ./src/php
+    container_name: php-grpc-server
+    ports:
+      - "4000:4000"
+  
+  frontend:
+    build: ./src/frontend
+    container_name: react-grpc-client
+    ports:
+      - "3000:3000"
