@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
-
 import { PingRequest } from './proto/ping_pb.js';
 import { PingServiceClient } from './proto/ping_grpc_web_pb';
 
-const client = new PingServiceClient('http://0.0.0.0:8000', null, null);
+const client = new PingServiceClient('http://localhost:8000', null, null);
 
 async function ping(message) {
-  console.log(message)
   const request = new PingRequest();
   request.setMessage(message);
 
